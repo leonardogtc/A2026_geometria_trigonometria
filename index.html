@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório de Trigonometria e Geometria Generativa em JS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Barra Superior -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">📐</span>
+        <h1>Trigonometria & Geometria em JavaScript</h1>
+      </div>
+      <p class="subtitle">Visualização de relações matemáticas em tempo real com Canvas e exportação SVG</p>
+    </header>
+
+    <!-- Navegação por Abas -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="circle">Círculo Trigonométrico</button>
+      <button class="tab-btn" data-tab="polygons">Polígonos & Estrelas</button>
+      <button class="tab-btn" data-tab="rose">Rosas Polares</button>
+      <button class="tab-btn" data-tab="lissajous">Curvas de Lissajous</button>
+    </nav>
+
+    <!-- Layout Principal: Painel de Controles + Canvas -->
+    <main class="main-content">
+      <!-- Painel Esquerdo: Controles & Fórmulas -->
+      <aside class="controls-panel">
+        
+        <!-- Controles para Círculo Trigonométrico -->
+        <div class="tab-content active" id="controls-circle">
+          <h2>Círculo Trigonométrico</h2>
+          <p class="desc">A relação fundamental entre coordenadas cartesianas $(x, y)$ e o raio unitário através de seno e cosseno.</p>
+          
+          <div class="control-group">
+            <div class="label-row">
+              <label for="circle-angle">Ângulo (θ):</label>
+              <span class="value-badge" id="circle-angle-val">45° (0.79 rad)</span>
+            </div>
+            <input type="range" id="circle-angle" min="0" max="360" value="45" step="1">
+          </div>
+
+          <div class="button-row">
+            <button id="btn-animate-circle" class="btn primary">▶ Animar Rotação</button>
+            <button id="btn-reset-circle" class="btn secondary">Resetar</button>
+          </div>
+
+          <div class="metrics-card">
+            <h3>Valores Matemáticos</h3>
+            <div class="metric-item">
+              <span class="metric-name cos-color">• Cosseno (x):</span>
+              <span class="metric-val" id="metric-cos">0.707</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-name sin-color">• Seno (y):</span>
+              <span class="metric-val" id="metric-sin">0.707</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-name tan-color">• Tangente (y/x):</span>
+              <span class="metric-val" id="metric-tan">1.000</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-formula">
+              <code>cos²(θ) + sin²(θ) = 1</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles para Polígonos & Estrelas -->
+        <div class="tab-content" id="controls-polygons">
+          <h2>Polígonos & Estrelas</h2>
+          <p class="desc">Distribuindo vértices uniformemente em torno de uma circunferência: $\theta_i = \frac{2\pi \cdot i}{N}$.</p>
+          
+          <div class="control-group">
+            <div class="label-row">
+              <label for="poly-sides">Pontas / Lados:</label>
+              <span class="value-badge" id="poly-sides-val">5</span>
+            </div>
+            <input type="range" id="poly-sides" min="3" max="24" value="5" step="1">
+          </div>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="poly-inner-ratio">Proporção Raio Interno (%):</label>
+              <span class="value-badge" id="poly-inner-val">45% (Estrela)</span>
+            </div>
+            <input type="range" id="poly-inner-ratio" min="10" max="100" value="45" step="1">
+            <span class="input-hint">100% gera um polígono regular convexo; menos gera estrela.</span>
+          </div>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="poly-rotation">Rotação Inicial:</label>
+              <span class="value-badge" id="poly-rot-val">0°</span>
+            </div>
+            <input type="range" id="poly-rotation" min="0" max="360" value="0" step="1">
+          </div>
+
+          <div class="toggle-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="poly-show-grid" checked>
+              <span>Mostrar linhas radiais e círculos-guia</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Controles para Rosas Polares -->
+        <div class="tab-content" id="controls-rose">
+          <h2>Rosas Polares (Rhodonea)</h2>
+          <p class="desc">Curvas em coordenadas polares geradas pela equação $r(\theta) = R \cdot \cos\left(\frac{n}{d} \cdot \theta\right)$.</p>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="rose-n">Numerador (n):</label>
+              <span class="value-badge" id="rose-n-val">4</span>
+            </div>
+            <input type="range" id="rose-n" min="1" max="15" value="4" step="1">
+          </div>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="rose-d">Denominador (d):</label>
+              <span class="value-badge" id="rose-d-val">1</span>
+            </div>
+            <input type="range" id="rose-d" min="1" max="10" value="1" step="1">
+          </div>
+
+          <div class="metrics-card">
+            <h3>Propriedades da Curva</h3>
+            <div class="metric-item">
+              <span class="metric-name">Fator k (n/d):</span>
+              <span class="metric-val" id="rose-k-val">4.00</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-name">Previsão de Pétalas:</span>
+              <span class="metric-val" id="rose-petals-val">8 pétalas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles para Curvas de Lissajous -->
+        <div class="tab-content" id="controls-lissajous">
+          <h2>Curvas de Lissajous</h2>
+          <p class="desc">Superposição de duas oscilações harmônicas ortogonais: $x = A \sin(at + \delta)$, $y = B \sin(bt)$.</p>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="liss-a">Frequência em X (a):</label>
+              <span class="value-badge" id="liss-a-val">3</span>
+            </div>
+            <input type="range" id="liss-a" min="1" max="10" value="3" step="1">
+          </div>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="liss-b">Frequência em Y (b):</label>
+              <span class="value-badge" id="liss-b-val">4</span>
+            </div>
+            <input type="range" id="liss-b" min="1" max="10" value="4" step="1">
+          </div>
+
+          <div class="control-group">
+            <div class="label-row">
+              <label for="liss-delta">Defasagem de Fase (δ):</label>
+              <span class="value-badge" id="liss-delta-val">0.50 π rad (90°)</span>
+            </div>
+            <input type="range" id="liss-delta" min="0" max="360" value="90" step="5">
+          </div>
+
+          <div class="button-row">
+            <button id="btn-animate-lissajous" class="btn primary">▶ Animar Traçador</button>
+          </div>
+        </div>
+
+        <!-- Botões de Ação Comuns -->
+        <div class="common-actions">
+          <button id="btn-download-svg" class="btn export-btn">📥 Baixar Esta Forma em SVG</button>
+        </div>
+      </aside>
+
+      <!-- Painel Direito: Onde a mágica visual acontece -->
+      <section class="canvas-panel">
+        <div class="canvas-wrapper">
+          <canvas id="main-canvas" width="800" height="600"></canvas>
+          <div class="canvas-badge" id="canvas-badge">Círculo Trigonométrico & Onda Senoidal</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

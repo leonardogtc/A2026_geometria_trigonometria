@@ -1,0 +1,20 @@
+{
+  "name": "geometria-trigonometria-js",
+  "version": "1.0.0",
+  "description": "Geração e visualização de formas geométricas com trigonometria em JavaScript e Node.js",
+  "main": "gerador_formas.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate": "node gerador_formas.js"
+  },
+  "keywords": [
+    "trigonometria",
+    "geometria",
+    "javascript",
+    "nodejs",
+    "canvas",
+    "svg"
+  ],
+  "author": "",
+  "license": "MIT"
+}

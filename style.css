@@ -1,0 +1,345 @@
+/* style.css - Design Moderno Dark-Theme para Visualizador Geométrico */
+
+:root {
+  --bg-main: #0b0f19;
+  --bg-card: #151c2e;
+  --bg-canvas: #090d16;
+  --border: #232f48;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-cos: #38bdf8;   /* Cyan para Cosseno / Eixo X */
+  --accent-sin: #34d399;   /* Esmeralda para Seno / Eixo Y */
+  --accent-tan: #fb923c;   /* Laranja para Tangente */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header */
+.app-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 28px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #f8fafc, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Navegação por Abas */
+.tabs-nav {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-card);
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+/* Layout Principal */
+.main-content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 950px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Painel de Controles */
+.controls-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tab-content {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tab-content.active {
+  display: flex;
+}
+
+.tab-content h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Controles de Entrada (Sliders, Botões) */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.value-badge {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--accent-cos);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary);
+  cursor: pointer;
+  height: 6px;
+  background: #252e42;
+  border-radius: 4px;
+}
+
+.input-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn.secondary {
+  background: #252e42;
+  color: var(--text-muted);
+}
+
+.btn.secondary:hover {
+  background: #333f5a;
+  color: var(--text-main);
+}
+
+.export-btn {
+  background: #10b981;
+  color: white;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.export-btn:hover {
+  background: #059669;
+}
+
+/* Cartões de Métricas */
+.metrics-card {
+  background: #0d121f;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metrics-card h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.metric-name {
+  color: var(--text-muted);
+}
+
+.cos-color { color: var(--accent-cos); }
+.sin-color { color: var(--accent-sin); }
+.tan-color { color: var(--accent-tan); }
+
+.metric-val {
+  font-weight: bold;
+}
+
+.metric-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+.metric-formula {
+  text-align: center;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.toggle-group {
+  margin-top: 4px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* Painel do Canvas */
+.canvas-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#main-canvas {
+  background-color: var(--bg-canvas);
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #1a2234;
+}
+
+.canvas-badge {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+}
